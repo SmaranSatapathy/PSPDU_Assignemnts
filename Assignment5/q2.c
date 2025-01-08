@@ -1,45 +1,43 @@
 #include <stdio.h>
+#include <math.h>
 
 int main()
 {
-    int x[20];
-    int y[20];
-    int z[20];
+    int range=20;
+    int x[range];
+    int y[range];
+    int z[range];
 
-    for(int i=0;i<20;i++)
+    int n=0,sentinel_value=-1,value,sums=0;
+    double sqrt_ans;
+
+    while(n<range)
     {
-        if(i==19)
-        {
-            printf("Nothing to enter. It's the sentinal value.\n");
-            x[19]=-1;
-        }
-        else{
-            printf("Enter number: ");
-            scanf("%d",&x[i]);
-        }
+        printf("Enter value: ");
+        scanf("%d",&value);
+
+        if(value==sentinel_value)
+        break;
+
+        x[n++]=value;
     }
 
-    for(int i=0;i<20;i++)
+    for(int i=0;i<n;i++)
     {
-        if(i==19)
-        {
-            printf("Nothing to enter. It's just the sentinal value.\n");
-            y[19]=-1;
-        }
-        else{
-            printf("Enter number: ");
-            scanf("%d",&y[i]);
-        }
+        printf("Enter number: ");
+        scanf("%d",&y[i]);
     }
 
-    for(int i=0;i<20;i++)
+    for(int i=0;i<n;i++)
     {
         z[i]=x[i]*y[i];
+        sums+=z[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        printf("%d\t\t%d\t\t%d\n",x[i],y[i],z[i]);
     }
 
-    for(int i=0;i<20;i++)
-    {
-        printf("%d x %d = %d\n",x[i],y[i],z[i]);
-    }
-    
+    sqrt_ans=sqrt(sums);
+    printf("Square root value i: %lf",sqrt_ans);
 }

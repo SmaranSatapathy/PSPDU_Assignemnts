@@ -2,47 +2,40 @@
 
 int main()
 {
-    int arr[12];
-    int even_sum=0,odd_sum=0,sum=0,check_digit=0,last_digit=0;
-    // int len=sizeof(arr);
-    // int len1=sizeof(arr[0]);
-    // printf("%d\n",len);
-    // printf("%d\n",len1);
+    int odd_sum=0,ans1=0,even_sum=0,ans2=0,check_digit=-1;
+    int code[12];
 
     for(int i=0;i<12;i++)
     {
-        printf("Enter number: ");
-        scanf(" %d",&arr[i]);
+        scanf("%d", &code[i]);
     }
 
-    for(int i=0;i<11;i++)
+    // step-1
+    for(int i=0;i<11;i+=2)
     {
-        if(i%2==0)
-        odd_sum+=arr[i];
-
-        else
-        even_sum+=arr[i];
+        odd_sum+=code[i];
     }
-    
-    sum=odd_sum*3+even_sum;
-    printf("Sum of odd numbers: %d\n",odd_sum);
-    printf("Sum of even numbers: %d\n",even_sum);
 
-    last_digit=sum%10;
+    ans1=odd_sum*3;
 
-    if(last_digit==0)
+    // step-2
+    for(int i=1;i<11;i+=2)
+    {
+        even_sum+=code[i];
+    }
+
+    ans2=ans1+even_sum;
+
+    // STEP-3
+    if(ans2%10==0)
     check_digit=0;
+    else
+    check_digit=10-(ans2%10);
+
+    // step-4
+    if(check_digit==code[11])
+    printf("UPC is correct.");
 
     else
-    check_digit=10-last_digit;
-
-    printf("Last digit: %d\n",last_digit);
-    printf("Check digit: %d\n",check_digit);
-
-    if(check_digit==arr[11])
-    printf("Validated!!");
-
-    else
-    printf("Error in barcode.");
-
+    printf("UPC is incorrect.");
 }
