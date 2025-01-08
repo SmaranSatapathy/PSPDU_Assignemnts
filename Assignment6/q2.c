@@ -1,58 +1,51 @@
 #include <stdio.h>
 
 struct element_t{
-    int atomic_number;
+    int atomic_num;
     char name[10];
-    char chemical_symbol[2];
-    char element_class[20];
+    char symbol[2];
+    char class[10];
     double atomic_wt;
-    int electons[7];
+    int electrons[7];
 };
 
 struct element_t scan_element()
 {
     struct element_t e;
     printf("Enter atomic number: ");
-    scanf("%d",&e.atomic_number);
-
-    printf("Enter name: ");
+    scanf("%d",&e.atomic_num);
+    printf("Enter name of the element: ");
     scanf("%s",&e.name);
-
-    printf("Enter chemical symbol: ");
-    scanf("%s",&e.chemical_symbol);
-
-    printf("Enter element class: ");
-    scanf("%s",&e.element_class);
-
+    printf("Enter symbol of the element: ");
+    scanf("%s",&e.symbol);
+    printf("Enter class of the element: ");
+    scanf("%s",&e.class);
     printf("Enter atomic weight: ");
     scanf("%lf",&e.atomic_wt);
 
-    printf("Enter electrons:\n "); 
+    printf("Enter electron configuration for: \n");
+
     for(int i=0;i<7;i++)
     {
-        printf("Enter the electrons for %d shell:",(i+1));
-        scanf("%d",&e.electons[i]);
+        printf("%d shell:\n",i+1);
+        scanf("%d",&e.electrons[i]);
     }
-
     return e;
 }
 
 void print_element(struct element_t e)
 {
-    printf("Atomic Number is: %d\n",e.atomic_number);
-    printf("Name of the element is: %s\n",e.name);
-    printf("Class of the element is: %s\n",e.element_class);
-    printf("Atomic weight is: %.5lf\n",e.atomic_wt);
-    printf("Arrangement of electrons are: ");
-    for(int i=0;i<7;i++)
+    printf("%d %s  %s  %s %lf ",e.atomic_num,e.name,e.symbol,e.class,e.atomic_wt);
+
+    for(int i=0;i<=6;i++)
     {
-        printf("%d ",e.electons[i]);
+        printf("%d ",e.electrons[i]);
     }
 }
-
 
 int main()
 {
     struct element_t e=scan_element();
     print_element(e);
+    return 0;
 }
