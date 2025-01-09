@@ -1,64 +1,67 @@
 #include <stdio.h>
 
-int calculate_sold(int purchased)
-{
-    int sold,sold_sum=0;
-    for(int i=1;i<=7;i++)
-    {
-        printf("Enter sold amount for Week %d: ",i);
-        scanf("%d",&sold);
-        sold_sum+=sold;
-    }
-    return sold_sum;
-}
-
 int main()
 {
-    int piels,coors,bud,iron_city,sold;
-    printf("Enter Piels: ");
+    int piels,coors,bud,iron_city,brand_id,amt;
+
+    printf("Enter initial inventory for Piels: ");
     scanf("%d",&piels);
-    printf("Enter Coors: ");
+
+    printf("Enter initial inventory for Coors: ");
     scanf("%d",&coors);
-    printf("Enter Bud: ");
+
+    printf("Enter initial inventory for Bud: ");
     scanf("%d",&bud);
-    printf("Enter Iron City: ");
+
+    printf("Enter initial inventory for Iron City: ");
     scanf("%d",&iron_city);
 
-
-    switch(1)
+    while(1)
     {
-        case 1:
+        printf("Enter brand id: ");
+        scanf("%d",&brand_id);
+
+        if(brand_id>4 || brand_id<1)
+        break;
+
+        printf("Enter amount: (+ for purchase, - for sale): ");
+        scanf("%d",&amt);
+
+        if(brand_id==1)
         {
-            printf("Transaction Details: \n");
-            sold=calculate_sold(piels);
-            printf("Brand: Piels\n");
-            printf("Amount purchased: %d\n",piels);
-            printf("Amount sold: %d\n",-(sold));
+            if(piels<0)
+            continue;
+            else
+            piels+=amt;
         }
 
-        case 2:
+        else if(brand_id==2)
         {
-            printf("Transaction Details: \n");
-            sold=calculate_sold(coors);
-            printf("Brand: Coors\n");
-            printf("Amount purchased: %d\n",coors);
-            printf("Amount sold: %d\n",-(sold));
+            if(coors<0)
+            continue;
+            else
+            coors+=amt;
         }
-        case 3:
+
+        else if(brand_id==3)
         {
-            printf("Transaction Details: \n");
-            sold=calculate_sold(bud);
-            printf("Brand: Bud\n");
-            printf("Amount purchased: %d\n",bud);
-            printf("Amount sold: %d\n",-(sold));
+            if(bud<0)
+            continue;
+            else
+            bud+=amt;
         }
-        case 4:
+
+        else if(brand_id==4)
         {
-            printf("Transaction Details: \n");
-            sold=calculate_sold(iron_city);
-            printf("Brand: Iron City\n");
-            printf("Amount purchased: %d\n",iron_city);
-            printf("Amount sold: %d\n",-(sold));
+            if(iron_city<0)
+            continue;
+            else
+            iron_city+=amt;
         }
     }
+
+    printf("Final inventory for Piels: %d\n",piels);
+    printf("Final inventory for Coors: %d\n",coors);
+    printf("Final inventory for Bud: %d\n",bud);
+    printf("Final inventory for Iron City: %d\n",iron_city);
 }
