@@ -1,0 +1,178 @@
+ASSIGNMENT-4
+Q1) Write a program for an automatic teller machine that dispenses money. The user should enter
+the amount desired (a multiple of 10 dollars) and the machine dispenses this amount using
+the least number of bills. The bills dispensed are 50s, 20s, and 10s. Write a function that
+determines how many of each kind of bill to dispense.
+
+#include <stdio.h>
+void calculate(int bills);
+
+int main()
+{
+    int bills;
+    printf("Enter the amount: ");
+    scanf("%d",&bills);
+    calculate(bills);
+}
+
+void calculate(int bills)
+{
+    int x,y,z;
+    x=bills/50;
+    y=(bills%50)/20;
+    z=((bills%50)%10)/10;
+    
+    printf("Answer are: %d,%d,%d",x,y,z);
+}
+
+Q2) Determine the following information about each value in a list of positive integers.
+a. Is the value a multiple of 7, 11, or 13?
+b. Is the sum of the digits odd or even?
+c. Is the value a prime number?
+
+#include <stdio.h>
+#include <stdbool.h>
+
+void check_multiples(int x,int *ptr);
+void checkSum(int x,int *ptr);
+void check_prime(int x,int *ptr);
+int main()
+{
+    int n,x,check1,check2,check3;
+    printf("Enter n:");
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        printf("Enter number: ");
+        scanf("%d",&x);
+
+        check_multiples(x,&check1);
+        checkSum(x,&check2);
+        check_prime(x,&check3);
+
+        printf("Is divisble? %s",(check1?"Yes":"No"));
+        printf("Even(1) or Odd(0) ? %s",(check2?"Even":"Odd"));
+        printf("Is prime? %s",(check3?"Yes":"No"));
+    }
+}
+
+void check_multiples(int x,int *ptr)
+{
+    *ptr=x%7==0||x%13==0||x%11==0;
+}
+
+void checkSum(int x,int *ptr)
+{
+    int sum=0;
+    while(x!=0)
+    {
+        int rem=x%10;
+        sum+=rem;
+        x/=10;
+    }
+    *ptr=sum%2==0;
+} 
+
+void check_prime(int x,int *ptr)
+{
+    int count=0;
+    for(int i=1;i<=x;i++)
+    {
+        if(x%i==0)
+        count++;
+    }
+
+    *ptr=count==2;
+}
+
+Q3) The square root of a number N can be approximated by repeated calculation using the formula
+
+NG = 0.5(LG + N/LG)
+
+where NG stands for next guess and LG stands for last guess. Write a function that calculates
+the square root of a number using this method.
+i The initial guess will be the starting value of LG . The program will compute a value for NG
+using the formula given. The difference between NG and LG is checked to see whether these
+two guesses are almost identical. If they are, NG is accepted as the square root; otherwise,
+the next guess (NG) becomes the last guess (LG) and the process is repeated (another value
+is computed for NG, the difference is checked, and so on). The loop should be repeated until
+the difference is less than 0.005. Use an initial guess of 1.0.
+
+#include <stdio.h>
+#include <math.h>
+
+void square_root_calculator(int N,double *LG,double *NG)
+{
+    while(1)
+    {
+        *NG=0.5*(*LG+(N/ *LG));
+         if(fabs(*NG-*LG)>0.005)
+         *LG=*NG;
+         else
+         break;
+    }
+}
+
+int main()
+{
+    int N;
+    double LG=1.0,NG=100;
+
+    printf("Enter number: ");
+    scanf("%d",&N);
+    square_root_calculator(N,&LG,&NG);
+    printf("Square root of %d is: %lf",N,NG);
+}
+
+Q4) When an aircraft or an automobile is moving through the atmosphere, it must overcome a force
+called drag that works against the motion of the vehicle. The drag force can be expressed as
+
+F =
+1
+2
+CD × A × ρ × V
+2
+
+where F is the force (in newtons), CD is the drag coefficient, A is the projected area of the
+vehicle perpendicular to the velocity vector (in m2
+
+), is the density of the gas or fluid through
+
+which the body is traveling (kg/m3
+
+), and V is the body’s velocity. The drag coefficient CD has
+a complex derivation and is frequently an empirical quantity. Sometimes the drag coefficient
+has its own dependencies on velocities: For an automobile, the range is from approximately
+0.2 (for a very streamlined vehicle) through about 0.5. For simplicity, assume a streamlined
+passenger vehicle is moving through air at sea level (where ρ = 1.23kg/m3
+
+). Write a program
+that allows a user to input A and CD interactively and calls a function to compute and return
+the drag force. Your program should call the drag force function repeatedly and display a table
+showing the drag force for the input shape for a range of velocities from 0 m/s to 40 m/s in
+increments of 5 m/s.
+
+#include <stdio.h>
+#define density 1.23
+
+double calculate(int *V,double CD,double A)
+{
+    return 0.5*CD*density*A**V**V;
+}
+
+int main()
+{
+    int V=0;
+    double CD,A,F;
+    printf("Enter CD: ");
+    scanf("%lf",&CD);
+    printf("Enter Area: ");
+    scanf("%lf",&A);
+
+    for(;V<=40;V+=5)
+    {
+        F=calculate(&V,CD,A);
+        printf("Drag force for %d m/s is: %.3lf\n",V,F);
+    }
+}
