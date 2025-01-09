@@ -1,0 +1,194 @@
+Assignment-1
+Q1) Write a program to assist in the design of a hydroelectric dam. Prompt the user for the height
+of the dam and for the number of cubic meters of water that are projected to flow from the top
+to the bottom of the dam each second. Predict how many megawatts (1MW = 106W) of power
+will be produced if 90% of the work done on the water by gravity is converted to electrical
+energy. Note that the mass of one cubic meter of water is 1000 kg. Use 9.80 meters/second2
+as the gravitational constant g . Be sure to use meaningful names for both the gravitational
+constant and the 90% efficiency constant. For one run, use a height of 170 m and flow of
+1.30 × 103 m3/s. The relevant formula ( w = work, m = mass, g = gravity, h = height) is: w
+= mgh.
+
+#include <stdio.h>
+#include <math.h>
+#define g 9.80
+#define efficiency 0.9
+
+int main()
+{
+   int ht;
+   double vol,mass,work,power;
+   printf("Enter the height in metres:");
+   scanf("%d",&ht);
+   printf("Height is: %dm\n",ht);
+
+   printf("Enter volume of water released: ");
+   scanf("%lf",&vol);
+   printf("Volume of water released is: %lfcubic metres.\n",vol);
+
+    mass=1000*vol;
+    printf("Mass recored is: %lfkgs\n",mass);
+
+    work=mass*g*ht;
+    printf("Work done is: %lf J\n",work);
+    power=efficiency*(work/1);
+    printf("Power done in Watts is: %lfW\n",power);
+    power=power/pow(10,6);
+    printf("Power done in Megawatts is: %lfMW",power);
+
+    return 0;
+}
+
+Q2) Metro City Planners proposes that a community conserve its water supply by replacing all the
+community’s toilets with low-flush models that use only 2 liters per flush. Assume that there
+is about 1 toilet for every 3 persons, that existing toilets use an average of 15 liters per flush,
+that a toilet is flushed on average 14 times per day, and that the cost to install each new toilet
+is $150. Write a program that would estimate the magnitude (liters/day) of the water saved
+and the total cost to install new toilets based on the community’s population.
+
+#include <stdio.h>
+#define new_toilet_usage 2
+#define old_toilet_usage 15
+#define usage 14
+#define installation_cost 150
+
+int main()
+{
+    int population,toilets;
+    double totalCost,water_saved;
+    printf("Enter population: ");
+    scanf("%d",&population);
+    printf("Population is: %d\n",population);
+
+    toilets=population/3;
+    printf("Toilets to be consumed is: %d\n",toilets);
+
+    totalCost=toilets*installation_cost;
+    printf("Total cost of setup: $ %lf \n",totalCost);
+
+    water_saved=usage*toilets*(old_toilet_usage-new_toilet_usage);
+    printf("Water saved in total is: %lf litres.",water_saved);
+    return 0;
+}
+
+Q3) Write a program that calculates the acceleration (m/s
+2
+) of a jet fighter launched from an
+aircraft-carrier catapult, given the jet’s takeoff speed in km/hr and the distance (meters) over
+which the catapult accelerates the jet from rest to takeoff. Assume constant acceleration.
+Also calculate the time (seconds) for the fighter to be accelerated to takeoff speed. When you
+prompt the user, be sure to indicate the units for each input. For one run, use a takeoff speed
+of 278 km/hr and a distance of 94 meters. Relevant formulas ( v = velocity, a = acceleration,
+t = time, s = distance)
+
+#include <stdio.h>
+
+int main()
+{
+    double v,s,a,t;
+    printf("Enter velocity of aircraft in km/hr: ");
+    scanf("%lf",&v);
+    v=(v*5)/18;
+    printf("Speed in m/s is: %lf\n",v);
+    printf("Enter distance covered in metres: ");
+    scanf("%lf",&s);
+
+    t=(2*s)/v;
+    printf("Time took is: %lf s.\n",t);
+
+    a=v/t;
+    printf("Acceleration is: %lf m/s2.",a);
+    return 0;
+}
+
+Q4) You have saved $500 to use as a down payment on a car. Before beginning your car shopping,
+you decide to write a program to help you figure out what your monthly payment will be, given
+the car’s purchase price, the monthly interest rate, and the time period over which you will
+pay back the loan. The formula for calculating your payment is
+Your program should prompt the user for the purchase price, the down payment, the annual
+interest rate and the total number of payments (usually 36, 48, or 60). It should then display
+the amount borrowed and the monthly payment including a dollar sign and two decimal places.
+
+#include <stdio.h>
+#include <math.h>
+
+#define saved 500
+
+int main()
+{
+    double purchase_price,down_payment,rate,number_of_payments,principle,payment;
+    printf("Enter purchase amount: ");
+    scanf("%lf",&purchase_price);
+    printf("Purchase amount is: $ %lf\n",purchase_price);
+
+    printf("Enter down payment: ");
+    scanf("%lf",&down_payment);
+    printf("Down payment is: $ %lf\n",down_payment);
+
+    printf("Enter rate: ");
+    scanf("%lf",&rate);
+    rate=rate/12/100;
+    printf("Rate is: %lf% \n",rate);
+
+    printf("Enter number of payments: ");
+    scanf("%lf",&number_of_payments);
+    printf("Installation is: $ %lf\n",number_of_payments);
+
+    principle=purchase_price-down_payment;
+    printf("Principle is: $ %lf\n",principle);
+
+    payment=(principle*rate)/(1-pow((1+rate),-number_of_payments));
+    printf("Payment to be paid is: $ %lf",payment);
+    return 0;
+}
+
+Q5) A cyclist coasting on a level road slows from a speed of 10 mi/hr to 2.5 mi/hr in one minute.
+
+Write a computer program that calculates the cyclist’s constant rate of acceleration and deter-
+mines how long the cyclist will take to come to rest, given an initial speed of 10 mi/hr.
+
+#include <stdio.h>
+#define u 10
+#define v 2.5
+
+int main()
+{
+    int t;
+    double a;
+    printf("Initial velocity is: %lf miles/hr.",u);
+    printf("Final velocity is: %lf miles/hr.",v);
+    t=t/60;
+    printf("Time in hrs: ",t);
+    a=(u-v)/t;
+    printf("Acceleration is: %lf",a);
+
+    
+}
+
+Q6) Write a program to take a depth (in kilometers) inside the earth as input data; compute and
+display the temperature at this depth in degrees Celsius and degrees Fahrenheit. The relevant
+formulas are
+Celsius = 10 (depth) + 20 (Celsius temperature at depth in km)
+Fahrenheit = 1.8 (Celsius) + 32
+Include two functions in your program. Function celsius at depth should compute and return
+the Celsius temperature at a depth measured in kilometers. Function f ahrenheit should
+convert a Celsius temperature to Fahrenheit.
+
+#include <stdio.h>
+
+int main()
+{
+    int depth;
+    double cel,fahr;
+
+    printf("Enter depth (in km): ");
+    scanf("%d",&depth);
+
+    cel=10*depth+20;
+    printf("Temperature in Celsius is: %lf\n",cel);
+
+    fahr=1.8*cel+32;
+    printf("Temperature in Fahrenheit is: %lf\n",fahr);
+
+    return 0;
+}

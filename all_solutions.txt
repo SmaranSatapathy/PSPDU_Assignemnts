@@ -1,0 +1,1303 @@
+Assignment-1
+Q1) Write a program to assist in the design of a hydroelectric dam. Prompt the user for the height
+of the dam and for the number of cubic meters of water that are projected to flow from the top
+to the bottom of the dam each second. Predict how many megawatts (1MW = 106W) of power
+will be produced if 90% of the work done on the water by gravity is converted to electrical
+energy. Note that the mass of one cubic meter of water is 1000 kg. Use 9.80 meters/second2
+as the gravitational constant g . Be sure to use meaningful names for both the gravitational
+constant and the 90% efficiency constant. For one run, use a height of 170 m and flow of
+1.30 × 103 m3/s. The relevant formula ( w = work, m = mass, g = gravity, h = height) is: w
+= mgh.
+
+#include <stdio.h>
+#include <math.h>
+#define g 9.80
+#define efficiency 0.9
+
+int main()
+{
+   int ht;
+   double vol,mass,work,power;
+   printf("Enter the height in metres:");
+   scanf("%d",&ht);
+   printf("Height is: %dm\n",ht);
+
+   printf("Enter volume of water released: ");
+   scanf("%lf",&vol);
+   printf("Volume of water released is: %lfcubic metres.\n",vol);
+
+    mass=1000*vol;
+    printf("Mass recored is: %lfkgs\n",mass);
+
+    work=mass*g*ht;
+    printf("Work done is: %lf J\n",work);
+    power=efficiency*(work/1);
+    printf("Power done in Watts is: %lfW\n",power);
+    power=power/pow(10,6);
+    printf("Power done in Megawatts is: %lfMW",power);
+
+    return 0;
+}
+
+Q2) Metro City Planners proposes that a community conserve its water supply by replacing all the
+community’s toilets with low-flush models that use only 2 liters per flush. Assume that there
+is about 1 toilet for every 3 persons, that existing toilets use an average of 15 liters per flush,
+that a toilet is flushed on average 14 times per day, and that the cost to install each new toilet
+is $150. Write a program that would estimate the magnitude (liters/day) of the water saved
+and the total cost to install new toilets based on the community’s population.
+
+#include <stdio.h>
+#define new_toilet_usage 2
+#define old_toilet_usage 15
+#define usage 14
+#define installation_cost 150
+
+int main()
+{
+    int population,toilets;
+    double totalCost,water_saved;
+    printf("Enter population: ");
+    scanf("%d",&population);
+    printf("Population is: %d\n",population);
+
+    toilets=population/3;
+    printf("Toilets to be consumed is: %d\n",toilets);
+
+    totalCost=toilets*installation_cost;
+    printf("Total cost of setup: $ %lf \n",totalCost);
+
+    water_saved=usage*toilets*(old_toilet_usage-new_toilet_usage);
+    printf("Water saved in total is: %lf litres.",water_saved);
+    return 0;
+}
+
+Q3) Write a program that calculates the acceleration (m/s
+2
+) of a jet fighter launched from an
+aircraft-carrier catapult, given the jet’s takeoff speed in km/hr and the distance (meters) over
+which the catapult accelerates the jet from rest to takeoff. Assume constant acceleration.
+Also calculate the time (seconds) for the fighter to be accelerated to takeoff speed. When you
+prompt the user, be sure to indicate the units for each input. For one run, use a takeoff speed
+of 278 km/hr and a distance of 94 meters. Relevant formulas ( v = velocity, a = acceleration,
+t = time, s = distance)
+
+#include <stdio.h>
+
+int main()
+{
+    double v,s,a,t;
+    printf("Enter velocity of aircraft in km/hr: ");
+    scanf("%lf",&v);
+    v=(v*5)/18;
+    printf("Speed in m/s is: %lf\n",v);
+    printf("Enter distance covered in metres: ");
+    scanf("%lf",&s);
+
+    t=(2*s)/v;
+    printf("Time took is: %lf s.\n",t);
+
+    a=v/t;
+    printf("Acceleration is: %lf m/s2.",a);
+    return 0;
+}
+
+Q4) You have saved $500 to use as a down payment on a car. Before beginning your car shopping,
+you decide to write a program to help you figure out what your monthly payment will be, given
+the car’s purchase price, the monthly interest rate, and the time period over which you will
+pay back the loan. The formula for calculating your payment is
+Your program should prompt the user for the purchase price, the down payment, the annual
+interest rate and the total number of payments (usually 36, 48, or 60). It should then display
+the amount borrowed and the monthly payment including a dollar sign and two decimal places.
+
+#include <stdio.h>
+#include <math.h>
+
+#define saved 500
+
+int main()
+{
+    double purchase_price,down_payment,rate,number_of_payments,principle,payment;
+    printf("Enter purchase amount: ");
+    scanf("%lf",&purchase_price);
+    printf("Purchase amount is: $ %lf\n",purchase_price);
+
+    printf("Enter down payment: ");
+    scanf("%lf",&down_payment);
+    printf("Down payment is: $ %lf\n",down_payment);
+
+    printf("Enter rate: ");
+    scanf("%lf",&rate);
+    rate=rate/12/100;
+    printf("Rate is: %lf% \n",rate);
+
+    printf("Enter number of payments: ");
+    scanf("%lf",&number_of_payments);
+    printf("Installation is: $ %lf\n",number_of_payments);
+
+    principle=purchase_price-down_payment;
+    printf("Principle is: $ %lf\n",principle);
+
+    payment=(principle*rate)/(1-pow((1+rate),-number_of_payments));
+    printf("Payment to be paid is: $ %lf",payment);
+    return 0;
+}
+
+Q5) A cyclist coasting on a level road slows from a speed of 10 mi/hr to 2.5 mi/hr in one minute.
+
+Write a computer program that calculates the cyclist’s constant rate of acceleration and deter-
+mines how long the cyclist will take to come to rest, given an initial speed of 10 mi/hr.
+
+#include <stdio.h>
+#define u 10
+#define v 2.5
+
+int main()
+{
+    int t;
+    double a;
+    printf("Initial velocity is: %lf miles/hr.",u);
+    printf("Final velocity is: %lf miles/hr.",v);
+    t=t/60;
+    printf("Time in hrs: ",t);
+    a=(u-v)/t;
+    printf("Acceleration is: %lf",a);
+
+    
+}
+
+Q6) Write a program to take a depth (in kilometers) inside the earth as input data; compute and
+display the temperature at this depth in degrees Celsius and degrees Fahrenheit. The relevant
+formulas are
+Celsius = 10 (depth) + 20 (Celsius temperature at depth in km)
+Fahrenheit = 1.8 (Celsius) + 32
+Include two functions in your program. Function celsius at depth should compute and return
+the Celsius temperature at a depth measured in kilometers. Function f ahrenheit should
+convert a Celsius temperature to Fahrenheit.
+
+#include <stdio.h>
+
+int main()
+{
+    int depth;
+    double cel,fahr;
+
+    printf("Enter depth (in km): ");
+    scanf("%d",&depth);
+
+    cel=10*depth+20;
+    printf("Temperature in Celsius is: %lf\n",cel);
+
+    fahr=1.8*cel+32;
+    printf("Temperature in Fahrenheit is: %lf\n",fahr);
+
+    return 0;
+}
+
+ASSIGNMENT-2
+Q1) While spending the summer as a surveyor’s assistant, you decide to write a program that
+transforms compass headings in degrees (0 to 360) to compass bearings. A compass bearing
+consists of three items: the direction you face (north or south), an angle between 0 and 90
+degrees, and the direction you turn before walking (east or west). For example, to get the
+bearing for a compass heading of 110.0 degrees, you would first face due south (180 degrees)
+and then turn 70.0 degrees east (180.0 - 70.0 = 110.0). Therefore, the bearing is South 70.0
+degrees East. Be sure to check the input for invalid compass headings.
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    int degrees,turn_degrees;
+    char face_direction[10],turn_direction[10];
+    printf("Enter compass heading: ");
+    scanf("%d",&degrees);
+    printf("Compass heading is: %d degrees.\n",degrees);
+
+    if((degrees >=0 && degrees <=90) || (degrees>=270 && degrees<=360))
+    {
+        strcpy(face_direction,"North");
+        printf("Direction faced is: %s\n",face_direction);
+
+        if(degrees>=0 && degrees<=90)
+        turn_degrees=degrees;
+        else
+        turn_degrees=360-degrees;
+
+        printf("Degrees to turn: %d\n",turn_degrees);
+    }
+    else
+    {
+        strcpy(face_direction,"South");
+        printf("Direction faced is: %s\n",face_direction);
+        
+        if(degrees>90 && degrees<=180)
+        turn_degrees=180-degrees;
+        else
+        turn_degrees=degrees-180;
+
+        printf("Degrees to turn : %d\n",turn_degrees);
+    }
+
+    if(degrees>=0 && degrees<=180)
+    {
+        strcpy(turn_direction,"East");
+        printf("Turning Direction: %s\n",turn_direction);
+    }
+
+    else
+    {
+        strcpy(turn_direction,"West");
+        printf("Turning Direction: %s\n",turn_direction);
+    }
+}
+
+Q2) Write a program to control a bread machine. Allow the user to input the type of bread as W for
+White and S for Sweet. Ask the user if the loaf size is double and if the baking is manual. The
+following table details the time chart for the machine for each bread type. Display a statement
+for each step. If the loaf size is double, increase the baking time by 50 percent. If baking is
+manual, stop after the loaf-shaping cycle and instruct the user to remove the dough for manual
+baking. Use functions to display instructions to the user and to compute the baking time.
+
+#include <stdio.h>
+
+double calculateTime(char bread_type,char double_check,char manual_check);
+
+void displayInfo(char bread_type,char double_check,char manual_check)
+{
+    printf("Bread type is: %c\n",bread_type);
+    printf("is bread loaf double? : %c\n",double_check);
+    printf("is baking manual? : %c\n",manual_check);
+
+    double time=calculateTime(bread_type,double_check,manual_check);
+    printf("\nTotal time taken for baking: %0.3lf mins.",time);
+}
+
+double calculateTime(char bread_type,char double_check,char manual_check)
+{
+    double time=0;
+
+    if(double_check=='y')
+    {
+         if(bread_type=='w')
+    {
+        printf("Primary kneading.");
+        time+=(15*0.5);
+        printf("Primary rising.");
+        time+=(60*0.5);
+        printf("Secondary kneading.");
+        time+=(18*0.5);
+        printf("Secondary rising.");
+        time+=(20*0.5);
+        printf("Loaf Shaping.");
+        time+=((2/60)*0.5);
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=(75*0.5);
+            printf("Baking.");
+            time+=(45*0.5);
+            printf("Cooling.");
+            time+=(30*0.5);
+        }
+    }
+
+    else if(bread_type=='s')
+    {
+        printf("Primary kneading.");
+        time+=(20*0.5);
+        printf("Primary rising.");
+        time+=(60*0.5);
+        printf("Secondary kneading.");
+        time+=(33*0.5);
+        printf("Secondary rising.");
+        time+=(30*0.5);
+        printf("Loaf Shaping.");
+        time+=((2/60)*0.5);
+        
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=(75*0.5);
+            printf("Baking.");
+            time+=(35*0.5);
+            printf("Cooling.");
+            time+=(30*0.5);
+        }
+    }
+    }
+
+    else{
+        if(bread_type=='w')
+    {
+        printf("Primary kneading.");
+        time+=15;
+        printf("Primary rising.");
+        time+=60;
+        printf("Secondary kneading.");
+        time+=18;
+        printf("Secondary rising.");
+        time+=20;
+        printf("Loaf Shaping.");
+        time+=(2/60);
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=75;
+            printf("Baking.");
+            time+=45;
+            printf("Cooling.");
+            time+=30;
+        }
+    }
+
+    else if(bread_type=='s')
+    {
+        printf("Primary kneading.");
+        time+=20;
+        printf("Primary rising.");
+        time+=60;
+        printf("Secondary kneading.");
+        time+=33;
+        printf("Secondary rising.");
+        time+=30;
+        printf("Loaf Shaping.");
+        time+=(2/60);
+        
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=75;
+            printf("Baking.");
+            time+=35;
+            printf("Cooling.");
+            time+=30;
+        }
+    }
+    }
+            return time;
+}
+
+int main()
+{
+    char bread_type,double_check,manual_check;
+    printf("Enter bread type: ");
+    scanf(" %c",&bread_type);
+    printf("Enter for double (y/n):");
+    scanf(" %c",&double_check);
+    printf("Enter whether baking is manual (y/n): ");
+    scanf(" %c",&manual_check);
+    displayInfo(bread_type,double_check,manual_check);
+}
+
+Q3) Write a program that interacts with the user like this:
+(1) Carbon monoxide
+(2) Hydrocarbons
+(3) Nitrogen oxides
+(4) Nonmethane hydrocarbons
+Enter pollutant number: 2
+Enter number of grams emitted per mile: 0.35
+Enter odometer reading: 40112
+Emissions exceed permitted level of 0.31 grams/mile.
+
+#include <stdio.h>
+
+
+int main()
+{
+    int choice,dist;
+    double emission;
+    printf("Enter choice: ");
+    scanf("%d",&choice);
+    printf("Enter dist: ");
+    scanf("%d",&dist);
+    printf("Enter emission: ");
+    scanf("%lf",&emission);
+
+
+    switch(choice)
+    {
+        case 1:
+        {
+            printf("Carbon Monoxide\n");
+            if(dist<=50000)
+            {
+                if(emission<=3.4)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 3.4 gram/miles");
+            }
+            else
+            {
+                if(emission<=4.2)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 4.2 gram/miles");
+            }
+            break;
+        }
+        case 2:
+        {
+            printf("Hydrocarbon\n");
+            if(dist<=50000)
+            {
+                if(emission<=0.31)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.31 gram/miles");
+            }
+            else
+            {
+                if(emission<=0.39)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.39 gram/miles");
+            }
+            break;
+        }
+        case 3:
+        {
+            printf("Nitrogen oxide\n");
+            if(dist<=50000)
+            {
+                if(emission<=0.4)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.4 gram/miles");
+            }
+            else
+            {
+                if(emission<=0.5)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.5 gram/miles");
+            }
+            break;
+        }
+        case 4:
+        {
+            printf("Nonmethane Hydrocarbons\n");
+            if(dist<=50000)
+            {
+                if(emission<=0.25)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.25 gram/miles");
+            }
+            else
+            {
+                if(emission<=0.31)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.31 gram/miles");
+            }
+            break;
+        }
+    }
+}
+
+
+Q4) Write a program that determines the day number (1 to 366) in a year for a date that is
+provided as input data. As an example, January 1, 1994, is day 1. December 31, 1993, is day
+365. December 31, 1996, is day 366, since 1996 is a leap year. A year is a leap year if it is
+divisible by four, except that any year divisible by 100 is a leap year only if it is divisible by
+400. Your program should accept the month, day, and year as integers. Include a function leap
+that returns 1 if called with a leap year, 0 otherwise.
+
+#include <stdio.h>
+
+int checkLeap(int yr)
+{
+    if(yr%4==0)
+    {
+        if(yr%100==0)
+        {
+            if(yr%400==0)
+            return 1;
+            else 
+            return 0;
+        }
+        else
+        return 1;
+    }
+    else
+    return 0;
+}
+
+
+int main()
+{
+    int dt,month,yr,days=0;
+    printf("Enter date: ");
+    scanf("%d",&dt);
+    printf("Enter month: ");
+    scanf("%d",&month);
+    printf("Enter year: ");
+    scanf("%d",&yr);
+
+    switch(month)
+    {
+        case 12:
+        days+=31;
+        case 11:
+        days+=30;
+        case 10:
+        days+=31;
+        case 9:
+        days+=30;
+        case 8:
+        days+=31;
+        case 7:
+        days+=31;
+        case 6:
+        days+=30;
+        case 5:
+        days+=31;
+        case 4:
+        days+=30;
+        case 3:
+        days+=31;
+        case 2:
+        {
+            if(checkLeap(yr)==1)
+            days+=29;
+            else
+            days+=28;
+        }
+        case 1:
+        days+=31;
+        break;
+    }
+    printf("Total days are: %d",days);
+}
+
+ASSIGNMENT-3
+Q1) a. Write a program that will find the smallest, largest, and average values in a collection of
+N numbers. Get the value of N before scanning each value in the collection of N numbers.
+b. Modify your program to compute and display both the range of values in the data collection
+and the standard deviation of the data collection. To compute the standard deviation,
+accumulate the sum of the squares of the data values ( sum squares ) in the main loop.
+After loop exit, use the formula
+
+#include<stdio.h>
+#include<limits.h>
+#include<math.h>
+
+int max(int a,int b)
+{
+    return (a>b?a:b);
+}
+
+int min(int a,int b)
+{
+    return (a<b?a:b);
+}
+
+int main()
+{
+	int n,i,maxValue=INT_MIN,minValue=INT_MAX,sum=0;
+    double sum_squares=0,std_div;
+	printf("Enter n: ");
+	scanf("%d",&n);
+	// int max,min;
+    double avg;
+
+    for(i=0;i<n;i++)
+    {
+        printf("Enter number:");
+        int x;
+        scanf("%d",&x);
+        sum+=x;
+        sum_squares+=pow(x,2);
+
+        maxValue=max(maxValue,x);
+        minValue=min(minValue,x);
+    }
+
+    avg=sum/n;
+
+    printf("max value is: %d\n",maxValue);
+    printf("min value is: %d\n",minValue);
+    printf("average is: %lf\n",avg);
+
+    // part b:
+    printf("Range is from: %d to %d.\n",minValue,maxValue);
+    printf("Sum of squares is: %lf.\n",sum_squares);
+
+    std_div=sqrt((sum_squares/n)-pow(avg,2));
+    printf("Standard deviation is: %lf",std_div);
+	
+	return 0;
+}
+
+Q2) Write a program to process weekly employee time cards for all employees of an organization.
+Each employee will have three data items: an identification number, the hourly wage rate, and
+the number of hours worked during a given week. Each employee is to be paid time and a half
+for all hours worked over 40. A tax amount of 3.625% of gross salary will be deducted. The
+program output should show the employee’s number and net pay. Display the total payroll
+and the average amount paid at the end of the run.
+
+#include <stdio.h>
+
+int main()
+{
+    int n=0,id_number,hourly_wage,hours,check=1;
+    double total_wages,net_wages,avg_amt=0,total_payroll=0;
+    printf("%d",check);
+    
+    while(check)
+    {
+        n++;
+        printf("Enter id number: ");
+        scanf("%d",&id_number);
+        printf("Enter wages receives per hour: ");
+        scanf("%d",&hourly_wage);
+        printf("Enter hours: ");
+        scanf("%d",&hours);
+
+        printf("Id Number is: %d\t",id_number);
+        printf("Hourly wages is: Rs.%d\t",hourly_wage);
+        printf("Hours is: %d hr.\t",hours);
+        if(hours<=40)
+            total_wages=hourly_wage*hours;
+        else
+        total_wages=hourly_wage*hours+(hours-40)*(hourly_wage/2);
+        total_payroll+=total_wages;
+
+        printf("Payment is: %lf\n",total_wages);
+
+        net_wages=total_wages-((3.625*total_wages)/100);
+        avg_amt+=net_wages;
+        printf("Net wages is: Rs.%lf \n",net_wages);
+
+        printf("Want to enter more details? ");
+        scanf("%d",&check);
+    }
+
+    printf("Total payroll is: Rs.%lf\n",total_payroll);
+    printf("Average amount paid is: Rs.%lf",(avg_amt/n));
+}
+
+Q3) Suppose you own a beer distributorship that sells Piels (ID number 1), Coors (ID number 2),
+Bud (ID number 3), and Iron City (ID number 4) by the case. Write a program to
+a. Get the case inventory for each brand for the start of the week.
+b. Process all weekly sales and purchase records for each brand.
+c. Display out the final inventory.
+
+#include <stdio.h>
+
+int main()
+{
+    int piels,coors,bud,iron_city,brand_id,amt;
+
+    printf("Enter initial inventory for Piels: ");
+    scanf("%d",&piels);
+
+    printf("Enter initial inventory for Coors: ");
+    scanf("%d",&coors);
+
+    printf("Enter initial inventory for Bud: ");
+    scanf("%d",&bud);
+
+    printf("Enter initial inventory for Iron City: ");
+    scanf("%d",&iron_city);
+
+    while(1)
+    {
+        printf("Enter brand id: ");
+        scanf("%d",&brand_id);
+
+        if(brand_id>4 || brand_id<1)
+        break;
+
+        printf("Enter amount: (+ for purchase, - for sale): ");
+        scanf("%d",&amt);
+
+        if(brand_id==1)
+        {
+            if(piels<0)
+            continue;
+            else
+            piels+=amt;
+        }
+
+        else if(brand_id==2)
+        {
+            if(coors<0)
+            continue;
+            else
+            coors+=amt;
+        }
+
+        else if(brand_id==3)
+        {
+            if(bud<0)
+            continue;
+            else
+            bud+=amt;
+        }
+
+        else if(brand_id==4)
+        {
+            if(iron_city<0)
+            continue;
+            else
+            iron_city+=amt;
+        }
+    }
+
+    printf("Final inventory for Piels: %d\n",piels);
+    printf("Final inventory for Coors: %d\n",coors);
+    printf("Final inventory for Bud: %d\n",bud);
+    printf("Final inventory for Iron City: %d\n",iron_city);
+}
+
+Q4) Assume that United States consumers put $51 billion in fast food charges on their credit and
+debit cards in 2006, up from $33.2 billion in 2005. Based on this model of the billions of fast
+food charges,
+
+F(t) = 33.2 + 16.8t
+
+where t is years since 2005, write a program that repeatedly prompts the user to enter a year
+after 2005 and then predicts the billions of dollars of fast food charges U.S. consumers will
+make in that year. Define and call a function f ast food billions that takes the year as its
+input argument and returns the prediction as its result. Tell the user that entry of a year
+before 2005 will cause the program to stop.
+
+#include <stdio.h>
+
+double fast_food_billions()
+{
+    int yr;
+    double revenue=0;
+    printf("Enter year: ");
+    scanf("%d",&yr);
+
+    if(yr>=2005)
+    {
+        
+
+        revenue=33.2+(17.8*(yr-2005));
+        printf("Year is: %d\n",yr);
+        return revenue;
+    }
+    return revenue;
+    
+}
+
+int main()
+{
+    while(1)
+    {
+        double ans=fast_food_billions();
+        if(ans==0)
+        {
+            printf("Wrong input.\n");
+            break;
+        }
+        else
+        printf("Revenue is: $ %lf dollars\n",ans);
+
+    }
+}
+
+ASSIGNMENT-4
+Q1) Write a program for an automatic teller machine that dispenses money. The user should enter
+the amount desired (a multiple of 10 dollars) and the machine dispenses this amount using
+the least number of bills. The bills dispensed are 50s, 20s, and 10s. Write a function that
+determines how many of each kind of bill to dispense.
+
+#include <stdio.h>
+void calculate(int bills);
+
+int main()
+{
+    int bills;
+    printf("Enter the amount: ");
+    scanf("%d",&bills);
+    calculate(bills);
+}
+
+void calculate(int bills)
+{
+    int x,y,z;
+    x=bills/50;
+    y=(bills%50)/20;
+    z=((bills%50)%10)/10;
+    
+    printf("Answer are: %d,%d,%d",x,y,z);
+}
+
+Q2) Determine the following information about each value in a list of positive integers.
+a. Is the value a multiple of 7, 11, or 13?
+b. Is the sum of the digits odd or even?
+c. Is the value a prime number?
+
+#include <stdio.h>
+#include <stdbool.h>
+
+void check_multiples(int x,int *ptr);
+void checkSum(int x,int *ptr);
+void check_prime(int x,int *ptr);
+int main()
+{
+    int n,x,check1,check2,check3;
+    printf("Enter n:");
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        printf("Enter number: ");
+        scanf("%d",&x);
+
+        check_multiples(x,&check1);
+        checkSum(x,&check2);
+        check_prime(x,&check3);
+
+        printf("Is divisble? %s",(check1?"Yes":"No"));
+        printf("Even(1) or Odd(0) ? %s",(check2?"Even":"Odd"));
+        printf("Is prime? %s",(check3?"Yes":"No"));
+    }
+}
+
+void check_multiples(int x,int *ptr)
+{
+    *ptr=x%7==0||x%13==0||x%11==0;
+}
+
+void checkSum(int x,int *ptr)
+{
+    int sum=0;
+    while(x!=0)
+    {
+        int rem=x%10;
+        sum+=rem;
+        x/=10;
+    }
+    *ptr=sum%2==0;
+} 
+
+void check_prime(int x,int *ptr)
+{
+    int count=0;
+    for(int i=1;i<=x;i++)
+    {
+        if(x%i==0)
+        count++;
+    }
+
+    *ptr=count==2;
+}
+
+Q3) The square root of a number N can be approximated by repeated calculation using the formula
+
+NG = 0.5(LG + N/LG)
+
+where NG stands for next guess and LG stands for last guess. Write a function that calculates
+the square root of a number using this method.
+i The initial guess will be the starting value of LG . The program will compute a value for NG
+using the formula given. The difference between NG and LG is checked to see whether these
+two guesses are almost identical. If they are, NG is accepted as the square root; otherwise,
+the next guess (NG) becomes the last guess (LG) and the process is repeated (another value
+is computed for NG, the difference is checked, and so on). The loop should be repeated until
+the difference is less than 0.005. Use an initial guess of 1.0.
+
+#include <stdio.h>
+#include <math.h>
+
+void square_root_calculator(int N,double *LG,double *NG)
+{
+    while(1)
+    {
+        *NG=0.5*(*LG+(N/ *LG));
+         if(fabs(*NG-*LG)>0.005)
+         *LG=*NG;
+         else
+         break;
+    }
+}
+
+int main()
+{
+    int N;
+    double LG=1.0,NG=100;
+
+    printf("Enter number: ");
+    scanf("%d",&N);
+    square_root_calculator(N,&LG,&NG);
+    printf("Square root of %d is: %lf",N,NG);
+}
+
+Q4) When an aircraft or an automobile is moving through the atmosphere, it must overcome a force
+called drag that works against the motion of the vehicle. The drag force can be expressed as
+
+F =
+1
+2
+CD × A × ρ × V
+2
+
+where F is the force (in newtons), CD is the drag coefficient, A is the projected area of the
+vehicle perpendicular to the velocity vector (in m2
+
+), is the density of the gas or fluid through
+
+which the body is traveling (kg/m3
+
+), and V is the body’s velocity. The drag coefficient CD has
+a complex derivation and is frequently an empirical quantity. Sometimes the drag coefficient
+has its own dependencies on velocities: For an automobile, the range is from approximately
+0.2 (for a very streamlined vehicle) through about 0.5. For simplicity, assume a streamlined
+passenger vehicle is moving through air at sea level (where ρ = 1.23kg/m3
+
+). Write a program
+that allows a user to input A and CD interactively and calls a function to compute and return
+the drag force. Your program should call the drag force function repeatedly and display a table
+showing the drag force for the input shape for a range of velocities from 0 m/s to 40 m/s in
+increments of 5 m/s.
+
+#include <stdio.h>
+#define density 1.23
+
+double calculate(int *V,double CD,double A)
+{
+    return 0.5*CD*density*A**V**V;
+}
+
+int main()
+{
+    int V=0;
+    double CD,A,F;
+    printf("Enter CD: ");
+    scanf("%lf",&CD);
+    printf("Enter Area: ");
+    scanf("%lf",&A);
+
+    for(;V<=40;V+=5)
+    {
+        F=calculate(&V,CD,A);
+        printf("Drag force for %d m/s is: %.3lf\n",V,F);
+    }
+}
+
+ASSIGNMENT-5
+Q1) A barcode scanner for Universal Product Codes (UPCs) verifies the 12-digit code scanned by
+comparing the code’s last digit (called a check digit) to its own computation of the check digit
+from the first 11 digits as follows:
+1. Calculate the sum of the digits in the odd-numbered positions (the first, third, ..., eleventh
+digits) and multiply this sum by 3.
+2. Calculate the sum of the digits in the even-numbered positions (the second, fourth, ...,
+tenth digits) and add this to the previous result.
+3. If the last digit of the result from step 2 is 0, then 0 is the check digit. Otherwise, subtract
+the last digit from 10 to calculate the check digit.
+4. If the check digit matches the final digit of the 12-digit UPC, the UPC is assumed correct.
+
+#include <stdio.h>
+
+int main()
+{
+    int odd_sum=0,ans1=0,even_sum=0,ans2=0,check_digit=-1;
+    int code[12];
+
+    for(int i=0;i<12;i++)
+    {
+        scanf("%d", &code[i]);
+    }
+
+    // step-1
+    for(int i=0;i<11;i+=2)
+    {
+        odd_sum+=code[i];
+    }
+
+    ans1=odd_sum*3;
+
+    // step-2
+    for(int i=1;i<11;i+=2)
+    {
+        even_sum+=code[i];
+    }
+
+    ans2=ans1+even_sum;
+
+    // STEP-3
+    if(ans2%10==0)
+    check_digit=0;
+    else
+    check_digit=10-(ans2%10);
+
+    // step-4
+    if(check_digit==code[11])
+    printf("UPC is correct.");
+
+    else
+    printf("UPC is incorrect.");
+}
+
+Q2) Write a program to take two numerical lists of the same length ended by a sentinel value and
+store the lists in arrays x and y, each of which has 20 elements. Let n be the actual number
+of data values in each list. Store the product of corresponding elements of x and y in a third
+array, z, also of size 20. Display the arrays x, y, and z in a three-column table. Then compute
+and display the square root of the sum of the items in z.
+
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    int range=20;
+    int x[range];
+    int y[range];
+    int z[range];
+
+    int n=0,sentinel_value=-1,value,sums=0;
+    double sqrt_ans;
+
+    while(n<range)
+    {
+        printf("Enter value: ");
+        scanf("%d",&value);
+
+        if(value==sentinel_value)
+        break;
+
+        x[n++]=value;
+    }
+
+    for(int i=0;i<n;i++)
+    {
+        printf("Enter number: ");
+        scanf("%d",&y[i]);
+    }
+
+    for(int i=0;i<n;i++)
+    {
+        z[i]=x[i]*y[i];
+        sums+=z[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        printf("%d\t\t%d\t\t%d\n",x[i],y[i],z[i]);
+    }
+
+    sqrt_ans=sqrt(sums);
+    printf("Square root value i: %lf",sqrt_ans);
+}
+
+Q3) Write and test a function deblank that takes a string output and a string input argument and
+returns a copy of the input argument with all blanks removed.
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+char* deblank(char input[])
+{
+    int i,j=0;
+    char *ans=(char*)malloc((strlen(input) + 1) * sizeof(char));;
+
+   for(i=0;i<strlen(input);i++)
+   {
+        if(input[i]!=' ')
+        {
+            ans[j]=input[i];
+            j++;
+        }
+   }
+    ans[j]='\0';
+    return ans;
+}
+int main()
+{
+    char *ans=deblank("Shrie Lone");
+    printf("Answer is: %s",ans);
+    return 0;
+}
+
+Q4) Write and test a recursive function that returns the value of the following recursive definition:
+
+f(x) = 0 if x ≤ 0
+f(x) = f(x − 1) + 2 otherwise
+What set of numbers is generated by this definition?
+
+#include <stdio.h>
+
+int f(int x)
+{
+    if(x<=0)
+    return 0;
+
+    else
+    return f(x-1)+2;
+}
+int main()
+{
+    int x,ans;
+    printf("Enter value of x: ");
+    scanf("%d",&x);
+
+    ans=f(x);
+    printf("Answer is: %d",ans);
+}
+
+ASSIGNMENT-6
+Q1) Define a structure type auto t to represent an automobile. Include components for the make
+and model (strings), the odometer reading, the manufacture and purchase dates (use another
+user-defined type called date t ), and the gas tank (use a user-defined type tank t with com-
+ponents for tank capacity and current fuel level, giving both in gallons). Write and test I/O
+functions scan date, scan tank, scan auto, print date, print tank, and print auto.
+
+#include <stdio.h>
+
+struct auto_t{
+    char make[20];
+    char model[20];
+};
+
+struct date_t{
+    double odometer_reading;
+    int manufacture,purchase_date;
+};
+
+struct tank_t{
+    double tank_capacity,current_fuel_level;
+};
+
+struct date_t scan_date()
+{
+    struct date_t d;
+    printf("Enter manufacture year: ");
+    scanf("%d",&d.manufacture);
+    printf("Enter odometer reading: ");
+    scanf("%lf",&d.odometer_reading);
+    printf("Enter purchase date: ");
+    scanf("%d",&d.purchase_date);
+    return d;
+}
+
+struct tank_t scan_tank()
+{
+    struct tank_t t;
+    printf("Enter tank capacity: (in gallons)");
+    scanf("%lf",&t.tank_capacity);
+    printf("Enter current fuel level (in gallons): ");
+    scanf("%lf",&t.current_fuel_level);
+
+    return t;
+}
+
+struct auto_t scan_auto()
+{   
+    struct auto_t a;
+    printf("Enter make of the car: ");
+    scanf("%s",&a.make);
+
+    printf("Enter model of the car: ");
+    scanf("%s",&a.model);
+
+    return a;
+}
+
+void print_date(struct date_t d)
+{
+    printf("Manufature year is: %d\n",d.manufacture);
+    printf("Odometer reading is: %lf\n",d.odometer_reading);
+    printf("Purchase date is: %d\n",d.purchase_date);
+}
+
+void print_tank(struct tank_t t)
+{
+    printf("tank capacity is: %lf gallons.\n",t.tank_capacity);
+    printf("current capacity is: %lf gallons.\n",t.current_fuel_level);
+}
+
+void print_auto(struct auto_t a)
+{
+    printf("Model is: %s\n",a.model);
+    printf("Make is: %s\n",a.make);
+}
+
+int main()
+{
+    struct auto_t a=scan_auto();
+    print_auto(a);
+
+    struct date_t d=scan_date();
+    print_date(d);
+
+    struct tank_t t=scan_tank();
+    print_tank(t);
+}
+
+Q2) Define a structure type element t to represent one element from the periodic table of elements.
+Components should include the atomic number (an integer); the name, chemical symbol, and
+class (strings); a numeric field for the atomic weight; and a seven-element array of integers
+for the number of electrons in each shell. The following are the components of an element t
+structure for sodium.
+
+#include <stdio.h>
+
+struct element_t{
+    int atomic_num;
+    char name[10];
+    char symbol[2];
+    char class[10];
+    double atomic_wt;
+    int electrons[7];
+};
+
+struct element_t scan_element()
+{
+    struct element_t e;
+    printf("Enter atomic number: ");
+    scanf("%d",&e.atomic_num);
+    printf("Enter name of the element: ");
+    scanf("%s",&e.name);
+    printf("Enter symbol of the element: ");
+    scanf("%s",&e.symbol);
+    printf("Enter class of the element: ");
+    scanf("%s",&e.class);
+    printf("Enter atomic weight: ");
+    scanf("%lf",&e.atomic_wt);
+
+    printf("Enter electron configuration for: \n");
+
+    for(int i=0;i<7;i++)
+    {
+        printf("%d shell:\n",i+1);
+        scanf("%d",&e.electrons[i]);
+    }
+    return e;
+}
+
+void print_element(struct element_t e)
+{
+    printf("%d %s  %s  %s %lf ",e.atomic_num,e.name,e.symbol,e.class,e.atomic_wt);
+
+    for(int i=0;i<=6;i++)
+    {
+        printf("%d ",e.electrons[i]);
+    }
+}
+
+int main()
+{
+    struct element_t e=scan_element();
+    print_element(e);
+    return 0;
+}
