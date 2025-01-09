@@ -1,0 +1,228 @@
+Q1) a. Write a program that will find the smallest, largest, and average values in a collection of
+N numbers. Get the value of N before scanning each value in the collection of N numbers.
+b. Modify your program to compute and display both the range of values in the data collection
+and the standard deviation of the data collection. To compute the standard deviation,
+accumulate the sum of the squares of the data values ( sum squares ) in the main loop.
+After loop exit, use the formula
+
+#include<stdio.h>
+#include<limits.h>
+#include<math.h>
+
+int max(int a,int b)
+{
+    return (a>b?a:b);
+}
+
+int min(int a,int b)
+{
+    return (a<b?a:b);
+}
+
+int main()
+{
+	int n,i,maxValue=INT_MIN,minValue=INT_MAX,sum=0;
+    double sum_squares=0,std_div;
+	printf("Enter n: ");
+	scanf("%d",&n);
+	// int max,min;
+    double avg;
+
+    for(i=0;i<n;i++)
+    {
+        printf("Enter number:");
+        int x;
+        scanf("%d",&x);
+        sum+=x;
+        sum_squares+=pow(x,2);
+
+        maxValue=max(maxValue,x);
+        minValue=min(minValue,x);
+    }
+
+    avg=sum/n;
+
+    printf("max value is: %d\n",maxValue);
+    printf("min value is: %d\n",minValue);
+    printf("average is: %lf\n",avg);
+
+    // part b:
+    printf("Range is from: %d to %d.\n",minValue,maxValue);
+    printf("Sum of squares is: %lf.\n",sum_squares);
+
+    std_div=sqrt((sum_squares/n)-pow(avg,2));
+    printf("Standard deviation is: %lf",std_div);
+	
+	return 0;
+}
+
+Q2) Write a program to process weekly employee time cards for all employees of an organization.
+Each employee will have three data items: an identification number, the hourly wage rate, and
+the number of hours worked during a given week. Each employee is to be paid time and a half
+for all hours worked over 40. A tax amount of 3.625% of gross salary will be deducted. The
+program output should show the employee’s number and net pay. Display the total payroll
+and the average amount paid at the end of the run.
+
+#include <stdio.h>
+
+int main()
+{
+    int n=0,id_number,hourly_wage,hours,check=1;
+    double total_wages,net_wages,avg_amt=0,total_payroll=0;
+    printf("%d",check);
+    
+    while(check)
+    {
+        n++;
+        printf("Enter id number: ");
+        scanf("%d",&id_number);
+        printf("Enter wages receives per hour: ");
+        scanf("%d",&hourly_wage);
+        printf("Enter hours: ");
+        scanf("%d",&hours);
+
+        printf("Id Number is: %d\t",id_number);
+        printf("Hourly wages is: Rs.%d\t",hourly_wage);
+        printf("Hours is: %d hr.\t",hours);
+        if(hours<=40)
+            total_wages=hourly_wage*hours;
+        else
+        total_wages=hourly_wage*hours+(hours-40)*(hourly_wage/2);
+        total_payroll+=total_wages;
+
+        printf("Payment is: %lf\n",total_wages);
+
+        net_wages=total_wages-((3.625*total_wages)/100);
+        avg_amt+=net_wages;
+        printf("Net wages is: Rs.%lf \n",net_wages);
+
+        printf("Want to enter more details? ");
+        scanf("%d",&check);
+    }
+
+    printf("Total payroll is: Rs.%lf\n",total_payroll);
+    printf("Average amount paid is: Rs.%lf",(avg_amt/n));
+}
+
+Q3) Suppose you own a beer distributorship that sells Piels (ID number 1), Coors (ID number 2),
+Bud (ID number 3), and Iron City (ID number 4) by the case. Write a program to
+a. Get the case inventory for each brand for the start of the week.
+b. Process all weekly sales and purchase records for each brand.
+c. Display out the final inventory.
+
+#include <stdio.h>
+
+int main()
+{
+    int piels,coors,bud,iron_city,brand_id,amt;
+
+    printf("Enter initial inventory for Piels: ");
+    scanf("%d",&piels);
+
+    printf("Enter initial inventory for Coors: ");
+    scanf("%d",&coors);
+
+    printf("Enter initial inventory for Bud: ");
+    scanf("%d",&bud);
+
+    printf("Enter initial inventory for Iron City: ");
+    scanf("%d",&iron_city);
+
+    while(1)
+    {
+        printf("Enter brand id: ");
+        scanf("%d",&brand_id);
+
+        if(brand_id>4 || brand_id<1)
+        break;
+
+        printf("Enter amount: (+ for purchase, - for sale): ");
+        scanf("%d",&amt);
+
+        if(brand_id==1)
+        {
+            if(piels<0)
+            continue;
+            else
+            piels+=amt;
+        }
+
+        else if(brand_id==2)
+        {
+            if(coors<0)
+            continue;
+            else
+            coors+=amt;
+        }
+
+        else if(brand_id==3)
+        {
+            if(bud<0)
+            continue;
+            else
+            bud+=amt;
+        }
+
+        else if(brand_id==4)
+        {
+            if(iron_city<0)
+            continue;
+            else
+            iron_city+=amt;
+        }
+    }
+
+    printf("Final inventory for Piels: %d\n",piels);
+    printf("Final inventory for Coors: %d\n",coors);
+    printf("Final inventory for Bud: %d\n",bud);
+    printf("Final inventory for Iron City: %d\n",iron_city);
+}
+
+Q4) Assume that United States consumers put $51 billion in fast food charges on their credit and
+debit cards in 2006, up from $33.2 billion in 2005. Based on this model of the billions of fast
+food charges,
+
+F(t) = 33.2 + 16.8t
+
+where t is years since 2005, write a program that repeatedly prompts the user to enter a year
+after 2005 and then predicts the billions of dollars of fast food charges U.S. consumers will
+make in that year. Define and call a function f ast food billions that takes the year as its
+input argument and returns the prediction as its result. Tell the user that entry of a year
+before 2005 will cause the program to stop.
+
+#include <stdio.h>
+
+double fast_food_billions()
+{
+    int yr;
+    double revenue=0;
+    printf("Enter year: ");
+    scanf("%d",&yr);
+
+    if(yr>=2005)
+    {
+        
+
+        revenue=33.2+(17.8*(yr-2005));
+        printf("Year is: %d\n",yr);
+        return revenue;
+    }
+    return revenue;
+    
+}
+
+int main()
+{
+    while(1)
+    {
+        double ans=fast_food_billions();
+        if(ans==0)
+        {
+            printf("Wrong input.\n");
+            break;
+        }
+        else
+        printf("Revenue is: $ %lf dollars\n",ans);
+
+    }
+}
