@@ -1,0 +1,391 @@
+Q1) While spending the summer as a surveyor’s assistant, you decide to write a program that
+transforms compass headings in degrees (0 to 360) to compass bearings. A compass bearing
+consists of three items: the direction you face (north or south), an angle between 0 and 90
+degrees, and the direction you turn before walking (east or west). For example, to get the
+bearing for a compass heading of 110.0 degrees, you would first face due south (180 degrees)
+and then turn 70.0 degrees east (180.0 - 70.0 = 110.0). Therefore, the bearing is South 70.0
+degrees East. Be sure to check the input for invalid compass headings.
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    int degrees,turn_degrees;
+    char face_direction[10],turn_direction[10];
+    printf("Enter compass heading: ");
+    scanf("%d",&degrees);
+    printf("Compass heading is: %d degrees.\n",degrees);
+
+    if((degrees >=0 && degrees <=90) || (degrees>=270 && degrees<=360))
+    {
+        strcpy(face_direction,"North");
+        printf("Direction faced is: %s\n",face_direction);
+
+        if(degrees>=0 && degrees<=90)
+        turn_degrees=degrees;
+        else
+        turn_degrees=360-degrees;
+
+        printf("Degrees to turn: %d\n",turn_degrees);
+    }
+    else
+    {
+        strcpy(face_direction,"South");
+        printf("Direction faced is: %s\n",face_direction);
+        
+        if(degrees>90 && degrees<=180)
+        turn_degrees=180-degrees;
+        else
+        turn_degrees=degrees-180;
+
+        printf("Degrees to turn : %d\n",turn_degrees);
+    }
+
+    if(degrees>=0 && degrees<=180)
+    {
+        strcpy(turn_direction,"East");
+        printf("Turning Direction: %s\n",turn_direction);
+    }
+
+    else
+    {
+        strcpy(turn_direction,"West");
+        printf("Turning Direction: %s\n",turn_direction);
+    }
+}
+
+Q2) Write a program to control a bread machine. Allow the user to input the type of bread as W for
+White and S for Sweet. Ask the user if the loaf size is double and if the baking is manual. The
+following table details the time chart for the machine for each bread type. Display a statement
+for each step. If the loaf size is double, increase the baking time by 50 percent. If baking is
+manual, stop after the loaf-shaping cycle and instruct the user to remove the dough for manual
+baking. Use functions to display instructions to the user and to compute the baking time.
+
+#include <stdio.h>
+
+double calculateTime(char bread_type,char double_check,char manual_check);
+
+void displayInfo(char bread_type,char double_check,char manual_check)
+{
+    printf("Bread type is: %c\n",bread_type);
+    printf("is bread loaf double? : %c\n",double_check);
+    printf("is baking manual? : %c\n",manual_check);
+
+    double time=calculateTime(bread_type,double_check,manual_check);
+    printf("\nTotal time taken for baking: %0.3lf mins.",time);
+}
+
+double calculateTime(char bread_type,char double_check,char manual_check)
+{
+    double time=0;
+
+    if(double_check=='y')
+    {
+         if(bread_type=='w')
+    {
+        printf("Primary kneading.");
+        time+=(15*0.5);
+        printf("Primary rising.");
+        time+=(60*0.5);
+        printf("Secondary kneading.");
+        time+=(18*0.5);
+        printf("Secondary rising.");
+        time+=(20*0.5);
+        printf("Loaf Shaping.");
+        time+=((2/60)*0.5);
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=(75*0.5);
+            printf("Baking.");
+            time+=(45*0.5);
+            printf("Cooling.");
+            time+=(30*0.5);
+        }
+    }
+
+    else if(bread_type=='s')
+    {
+        printf("Primary kneading.");
+        time+=(20*0.5);
+        printf("Primary rising.");
+        time+=(60*0.5);
+        printf("Secondary kneading.");
+        time+=(33*0.5);
+        printf("Secondary rising.");
+        time+=(30*0.5);
+        printf("Loaf Shaping.");
+        time+=((2/60)*0.5);
+        
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=(75*0.5);
+            printf("Baking.");
+            time+=(35*0.5);
+            printf("Cooling.");
+            time+=(30*0.5);
+        }
+    }
+    }
+
+    else{
+        if(bread_type=='w')
+    {
+        printf("Primary kneading.");
+        time+=15;
+        printf("Primary rising.");
+        time+=60;
+        printf("Secondary kneading.");
+        time+=18;
+        printf("Secondary rising.");
+        time+=20;
+        printf("Loaf Shaping.");
+        time+=(2/60);
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=75;
+            printf("Baking.");
+            time+=45;
+            printf("Cooling.");
+            time+=30;
+        }
+    }
+
+    else if(bread_type=='s')
+    {
+        printf("Primary kneading.");
+        time+=20;
+        printf("Primary rising.");
+        time+=60;
+        printf("Secondary kneading.");
+        time+=33;
+        printf("Secondary rising.");
+        time+=30;
+        printf("Loaf Shaping.");
+        time+=(2/60);
+        
+        if(manual_check=='n')
+        {
+            printf("Final Rising.");
+            time+=75;
+            printf("Baking.");
+            time+=35;
+            printf("Cooling.");
+            time+=30;
+        }
+    }
+    }
+            return time;
+}
+
+int main()
+{
+    char bread_type,double_check,manual_check;
+    printf("Enter bread type: ");
+    scanf(" %c",&bread_type);
+    printf("Enter for double (y/n):");
+    scanf(" %c",&double_check);
+    printf("Enter whether baking is manual (y/n): ");
+    scanf(" %c",&manual_check);
+    displayInfo(bread_type,double_check,manual_check);
+}
+
+Q3) Write a program that interacts with the user like this:
+(1) Carbon monoxide
+(2) Hydrocarbons
+(3) Nitrogen oxides
+(4) Nonmethane hydrocarbons
+Enter pollutant number: 2
+Enter number of grams emitted per mile: 0.35
+Enter odometer reading: 40112
+Emissions exceed permitted level of 0.31 grams/mile.
+
+#include <stdio.h>
+
+
+int main()
+{
+    int choice,dist;
+    double emission;
+    printf("Enter choice: ");
+    scanf("%d",&choice);
+    printf("Enter dist: ");
+    scanf("%d",&dist);
+    printf("Enter emission: ");
+    scanf("%lf",&emission);
+
+
+    switch(choice)
+    {
+        case 1:
+        {
+            printf("Carbon Monoxide\n");
+            if(dist<=50000)
+            {
+                if(emission<=3.4)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 3.4 gram/miles");
+            }
+            else
+            {
+                if(emission<=4.2)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 4.2 gram/miles");
+            }
+            break;
+        }
+        case 2:
+        {
+            printf("Hydrocarbon\n");
+            if(dist<=50000)
+            {
+                if(emission<=0.31)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.31 gram/miles");
+            }
+            else
+            {
+                if(emission<=0.39)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.39 gram/miles");
+            }
+            break;
+        }
+        case 3:
+        {
+            printf("Nitrogen oxide\n");
+            if(dist<=50000)
+            {
+                if(emission<=0.4)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.4 gram/miles");
+            }
+            else
+            {
+                if(emission<=0.5)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.5 gram/miles");
+            }
+            break;
+        }
+        case 4:
+        {
+            printf("Nonmethane Hydrocarbons\n");
+            if(dist<=50000)
+            {
+                if(emission<=0.25)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.25 gram/miles");
+            }
+            else
+            {
+                if(emission<=0.31)
+                {
+                    printf("Emission is under control.");
+                }
+                else
+                printf("Emission is exceeded 0.31 gram/miles");
+            }
+            break;
+        }
+    }
+}
+
+
+Q4) Write a program that determines the day number (1 to 366) in a year for a date that is
+provided as input data. As an example, January 1, 1994, is day 1. December 31, 1993, is day
+365. December 31, 1996, is day 366, since 1996 is a leap year. A year is a leap year if it is
+divisible by four, except that any year divisible by 100 is a leap year only if it is divisible by
+400. Your program should accept the month, day, and year as integers. Include a function leap
+that returns 1 if called with a leap year, 0 otherwise.
+
+#include <stdio.h>
+
+int checkLeap(int yr)
+{
+    if(yr%4==0)
+    {
+        if(yr%100==0)
+        {
+            if(yr%400==0)
+            return 1;
+            else 
+            return 0;
+        }
+        else
+        return 1;
+    }
+    else
+    return 0;
+}
+
+
+int main()
+{
+    int dt,month,yr,days=0;
+    printf("Enter date: ");
+    scanf("%d",&dt);
+    printf("Enter month: ");
+    scanf("%d",&month);
+    printf("Enter year: ");
+    scanf("%d",&yr);
+
+    switch(month)
+    {
+        case 12:
+        days+=31;
+        case 11:
+        days+=30;
+        case 10:
+        days+=31;
+        case 9:
+        days+=30;
+        case 8:
+        days+=31;
+        case 7:
+        days+=31;
+        case 6:
+        days+=30;
+        case 5:
+        days+=31;
+        case 4:
+        days+=30;
+        case 3:
+        days+=31;
+        case 2:
+        {
+            if(checkLeap(yr)==1)
+            days+=29;
+            else
+            days+=28;
+        }
+        case 1:
+        days+=31;
+        break;
+    }
+    printf("Total days are: %d",days);
+}
